@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function MyHeader() {
   return (
     <>
@@ -9,8 +10,10 @@ function MyHeader() {
           </p>
         </div>
         <div className="d-flex gap-1">
-            <button className="MyLoginBtn">Login</button>
+          <button className="MyLoginBtn">Login</button>
+          <Link to="/register">
             <button className="MyRegBtn">Registrati</button>
+          </Link>
         </div>
       </header>
     </>
