@@ -1,13 +1,15 @@
 <?php
-require 'config/config.php';
-require 'src/services/Database.php';
-require 'src/models/User.php';
+// Includi la configurazione del database
+$config = require_once __DIR__ . '/../config/config.php';
 
-// Prendo le informazioni di connessione al DB
-$config = include('config/config.php');
-// Collego al database con l'istanza
+// Includi i file necessari
+require_once __DIR__ . '/../src/services/Database.php';
+require_once __DIR__ . '/../src/models/Activity.php'; // Percorso corretto
+require_once __DIR__ . '/../src/models/User.php'; // Percorso corretto
+require_once 'router.php'; 
+
+// Stanzio il PDO qui
 $database = new Database($config);
-// Stanzio il pdo
 $pdo = $database->getConnection();
 
-
+echo 'Connessione ok';

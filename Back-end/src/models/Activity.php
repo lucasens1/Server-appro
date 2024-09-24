@@ -20,7 +20,7 @@ class Activity
             return null;
         }
         // Cartella di upload
-        $uploadsDirectory = 'public/uploads/';
+        $uploadsDirectory = __DIR__ . '/../../public/uploads/';
         // Nome del file, unico
         $fileName = uniqid() . '-' . basename($file['name']);
         $filePath = $uploadsDirectory . $fileName;

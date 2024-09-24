@@ -5,7 +5,7 @@ class Database {
     public function __construct($config) 
     {
         // DSN (Data Source Name)
-        $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'];
+        $dsn = 'mysql:host=' . $config['db_host'] . ';port=' . $config['db_port'] . ';dbname=' . $config['db_name'];
         try{
             // PDO per connettersi al DB -> PHP Data Objects, interfaccia per accedere ai DB
             $this->pdo = new PDO($dsn, $config['db_user'], $config['db_pass']);
