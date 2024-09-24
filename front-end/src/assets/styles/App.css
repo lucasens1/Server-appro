@@ -16,3 +16,8 @@
     margin: 0 auto;
     border: 1px solid black;
 }
+
+.ms_header{
+    background-color: whitesmoke;
+    border: 3px solid saddlebrown;
+}

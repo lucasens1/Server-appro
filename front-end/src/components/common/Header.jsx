@@ -1,7 +1,7 @@
 function MyHeader() {
   return (
     <>
-      <header className="p-2 d-flex justify-space-between align-center">
+      <header className="p-2 d-flex justify-space-between align-center ms_header">
         <div className="d-flex gap-1 align-center">
           <h2>ACTIVIX</h2>
           <p>
