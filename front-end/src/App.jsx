@@ -1,26 +1,18 @@
-import { useState } from 'react'
-import './assets/styles/App.css'
+import { useState } from "react";
+import MyHeader from './components/common/Header.jsx';
+import "./assets/styles/App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      {/* text-center importato da Utility.css */}
-      <h1 className='text-center'>Gestionale</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <h1 className="text-center pt-2">Gestionale</h1>
+      <div className="container">
+        <section>
+          <MyHeader/>
+        </section>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

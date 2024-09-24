@@ -1,0 +1,29 @@
+.MyLoginBtn{
+    background-color: rgb(177, 13, 13);
+    padding: 12px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    transition: 0.7s;
+}
+
+.MyLoginBtn:hover{
+    background-color: cadetblue;
+    color: black;
+    transition: 0.7s;
+}
+
+.MyRegBtn{
+    background-color: rgb(254, 254, 254);
+    color: black;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    transition: 0.7s;
+}
+
+.MyRegBtn:hover{
+    background-color: rgb(50, 35, 224);
+    color: rgb(255, 255, 255);
+    transition: 0.7s;
+}

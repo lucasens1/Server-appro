@@ -1,9 +1,18 @@
 @import url('./utility/Utility.css');
+@import url('./utility/Btns.css');
 :root{
     background-color: lightsteelblue;
+    font-family: 'Poppins', sans-serif;
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.container{
+    width: 80%;
+    min-height: 600px;
+    margin: 0 auto;
+    border: 1px solid black;
 }
