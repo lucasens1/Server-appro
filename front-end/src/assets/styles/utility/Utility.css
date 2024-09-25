@@ -65,3 +65,11 @@
 .text-center{
     text-align: center;
 }
+
+.ms_bg-1{
+    background-color: seagreen;
+}
+
+.fc-w{
+    color: white;
+}
