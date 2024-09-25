@@ -1,9 +1,15 @@
 // File per API
 const API_BASE_URL = "http://localhost:8000";
 
-export const fetchData = async (stringaDaFineAPI) => {
+export const fetchData = async (stringaDaFineAPI, method = "GET", body = null) => {
     try{
-        const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`);
+        const options = {
+            method,
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        };
+        const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`, options);
         if(!response.ok){
             throw new Error('Connessione fallita.');
         }
