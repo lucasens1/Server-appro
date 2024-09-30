@@ -10,7 +10,9 @@ function MyHeader() {
           </p>
         </div>
         <div className="d-flex gap-1">
-          <button className="MyLoginBtn">Login</button>
+          <Link to="/login">
+            <button className="MyLoginBtn">Login</button>
+          </Link>
           <Link to="/register">
             <button className="MyRegBtn">Registrati</button>
           </Link>
