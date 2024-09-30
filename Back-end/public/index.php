@@ -11,5 +11,3 @@ require_once 'router.php';
 // Stanzio il PDO qui
 $database = new Database($config);
 $pdo = $database->getConnection();
-
-echo 'Connessione ok';

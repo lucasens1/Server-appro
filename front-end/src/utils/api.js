@@ -10,6 +10,9 @@ export const fetchData = async (stringaDaFineAPI, method = "GET", body = null) =
             }
         };
         const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`, options);
+        // Log della risposta per debugging crea problema di already read stream
+        /* const responseText = await response.text(); 
+        console.log("Risposta dal server:", responseText);  */
         if(!response.ok){
             throw new Error('Connessione fallita.');
         }
