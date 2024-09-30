@@ -49,7 +49,8 @@ class Activity
 
     public function getAllActivities()
     {
-        $query = "SELECT * FROM activities";
+        $query = "SELECT activities.*, users.email FROM activities 
+                JOIN users ON activities.owner_id = users.id";
         $prep = $this->pdo->prepare($query);
         $prep->execute();
         return $prep->fetchAll(PDO::FETCH_ASSOC);

@@ -8,6 +8,7 @@ function Activities() {
     const getActivities = async () => {
         try {
             const data = await fetchData('/activities');
+            console.log(data);
             setActivities(data);
         } catch (err) {
             setError(err.message);
@@ -32,7 +33,7 @@ function Activities() {
                 <ul>
                     {activities.map((activity) => (
                         <li key={activity.id}>
-                            {activity.title} - {activity.description} - {activity.owner_id}
+                            {activity.title} - {activity.description} - {activity.email}
                         </li>
                     ))}
                 </ul>
