@@ -19,18 +19,19 @@ function Dashboard() {
     const getUserActivities = async () => {
       if (user && !isFetch) {
         try {
-            console.log(user.id);
+          console.log(user.id);
           const data = await fetchUserActivities(user.id);
-          console.log('Attività utente:', data); // Log per verificare i dati
+          console.log("Attività utente:", data); // Log per verificare i dati
           if (Array.isArray(data)) {
             setUActivities(data);
             setIsFetch(true);
-          } else if (data.error) { // Controllo se ci sono errori
+          } else if (data.error) {
+            // Controllo se ci sono errori
             setError(data.error);
           }
         } catch (error) {
-          console.error('Errore nel recupero delle attività:', error);
-          setError('Si è verificato un errore nel recupero delle attività.'); // Imposta un messaggio di errore
+          console.error("Errore nel recupero delle attività:", error);
+          setError("Si è verificato un errore nel recupero delle attività."); // Imposta un messaggio di errore
         }
       } else {
         return;
@@ -48,22 +49,28 @@ function Dashboard() {
           <MyHeader />
         </section>
         <section className="p-2 fc-w callout d-flex w-100">
-          {error && <p className="ms_error-message">{error}</p>} 
+          {error && <p className="ms_error-message">{error}</p>}
           <div className="d-flex gap-1 pt-1 w-100">
-          {activitiesU.length > 0 ? (
-            activitiesU.map(activity => (
-              <div key={activity.id} className={activitiesU.length === 1 ? 'col-12' : 'col-6'}>
-              <div  className="callout ms_bg-w p-2 justify-space-evenly text-center">
-                <h4> <strong>{activity.title}</strong> </h4> 
-                <p>{activity.description}</p>
-                <p>{activity.created_at}</p>
-              </div>   
-            </div>
-            
-            ))
-          ) : (
-            !error && <p>Nessuna attività trovata. <br /> <strong>Aggiungi!</strong></p>
-          )}
+            {activitiesU.length > 0
+              ? activitiesU.map((activity) => (
+                  <div
+                    key={activity.id}
+                    className={activitiesU.length === 1 ? "col-12" : "col-6"}
+                  >
+                    <div className="callout ms_bg-w p-2 justify-space-evenly text-center">
+                      <h4>
+                        <strong>{activity.title}</strong>
+                      </h4>
+                      <p>{activity.description}</p>
+                      <p>{activity.created_at}</p>
+                    </div>
+                  </div>
+                ))
+              : !error && (
+                  <p className="text-center">
+                    Nessuna attività trovata. <br /> <strong>Aggiungi!</strong>
+                  </p>
+                )}
           </div>
         </section>
       </div>
