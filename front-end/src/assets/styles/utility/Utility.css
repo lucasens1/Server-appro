@@ -76,6 +76,7 @@
 
 .ms_bg-w{
     background-color: white;
+    color: black;
 }
 
 small.ms_bg-w{
@@ -92,4 +93,26 @@ small.ms_bg-w{
 
 .mg-1{
     margin: 8px;
+}
+
+.mr-1{
+    margin-right: 8px;
+}
+
+.h-100{
+    height: 100%;
+}
+
+.col-12{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.ms_error-message{
+    color: red;
+    background-color: whitesmoke;
 }

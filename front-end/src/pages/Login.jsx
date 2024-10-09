@@ -1,3 +1,7 @@
+import { useState } from "react";
+import MyHeader from "../components/common/Header";
+import { loginUser } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 function LoginPage() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -18,7 +22,7 @@ function LoginPage() {
 
         try {
             console.log(formData)
-            const response = await registerUser('/login', 'POST', formData);
+            const response = await loginUser('/login', 'POST', formData);
             console.log(response);
             navigate('/')
         } catch (error) {

@@ -27,3 +27,18 @@
     color: rgb(255, 255, 255);
     transition: 0.7s;
 }
+
+.ms_dashbtn{
+    background-color: chocolate;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: white;
+    transition: 0.7s;
+}
+
+.ms_dashbtn:hover{
+    background-color: black;
+    color: chocolate;
+    transition: 0.7s;
+}

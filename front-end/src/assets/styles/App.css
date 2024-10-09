@@ -26,3 +26,12 @@ li{
     border: 3px solid saddlebrown;
 }
 
+.ms_link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.ms_link:hover{
+    text-decoration: underline;
+    transition: 0.7s;
+}

@@ -110,4 +110,11 @@ class Activity
         $prep = $this->pdo->prepare($query);
         return $prep->execute([':id' => $id]);
     }
+
+    public function getActivitiesByUserId($userId) {
+        $stmt = $this->pdo->prepare("SELECT * FROM activities WHERE owner_id = :ownerId");
+        $stmt->bindParam(':ownerId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

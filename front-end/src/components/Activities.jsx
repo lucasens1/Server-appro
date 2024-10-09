@@ -8,7 +8,6 @@ function Activities() {
   const getActivities = async () => {
     try {
       const data = await fetchData("/activities");
-      console.log(data);
       setActivities(data);
     } catch (err) {
       setError(err.message);
@@ -30,18 +29,18 @@ function Activities() {
       <h3>ATTIVITA' IN EVIDENZA</h3>
       <p>Lista di Attività che provengono dalla Chiamata API</p>
       {activities.length > 0 ? (
-        <ul>
+        <div className="d-flex gap-1 pt-1 h-100">
           {activities.map((activity) => (
-            <li key={activity.id}>
-              <div>
-                <strong>{activity.title}</strong> - {activity.description}
-              </div>
-              <div>
-                <strong>Email Proprietario:</strong> {activity.email}
-              </div>
-            </li>
+            <div key={activity.id} className="col-6">
+              <div  className="callout ms_bg-w p-2 justify-space-evenly">
+                <h4> <strong>{activity.title}</strong> </h4> 
+                <p>{activity.description}</p>
+                <h4> <strong>Email Proprietario:</strong></h4> 
+                <p>{activity.email}</p>
+              </div>   
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <div>
           <i>Caricamento Attività ..</i>

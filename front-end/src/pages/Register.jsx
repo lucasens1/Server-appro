@@ -2,6 +2,8 @@ import { useState } from "react";
 import MyHeader from "../components/common/Header";
 import { registerUser } from "../utils/api";
 import { useNavigate } from "react-router-dom";
+
+// Componente
 function MyRegisterPage() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({

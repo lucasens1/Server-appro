@@ -82,36 +82,36 @@ switch ($requestUri) {
         }
         break;
 
-        case '/login':
-            if ($requestMethod === 'POST') {
-                $user = new User($pdo);
-        
-                // Leggi il corpo della richiesta e decodifica i dati JSON
-                $data = json_decode(file_get_contents('php://input'), true);
-        
-                // Verifica che email e password siano presenti nei dati
-                if (isset($data['email'], $data['password'])) {
-                    $email = $data['email'];
-                    $password = $data['password'];
-        
-                    // Prova a effettuare il login
-                    if ($user->login($email, $password)) {
-                        // Prendo i dati utente!
-                        $userData = $user->getUserByEmail($email);
-                        echo json_encode(["message" => "Login effettuato con successo!", "user" => $userData]);
-                    } else {
-                        http_response_code(401); // Unauthorized
-                        echo json_encode(["error" => "Credenziali non valide."]);
-                    }
+    case '/login':
+        if ($requestMethod === 'POST') {
+            $user = new User($pdo);
+
+            // Leggi il corpo della richiesta e decodifica i dati JSON
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            // Verifica che email e password siano presenti nei dati
+            if (isset($data['email'], $data['password'])) {
+                $email = $data['email'];
+                $password = $data['password'];
+
+                // Prova a effettuare il login
+                if ($user->login($email, $password)) {
+                    // Prendo i dati utente!
+                    $userData = $user->getUserByEmail($email);
+                    echo json_encode(["message" => "Login effettuato con successo!", "user" => $userData]);
                 } else {
-                    http_response_code(400); // Bad Request
-                    echo json_encode(["error" => "Dati mancanti."]);
+                    http_response_code(401); // Unauthorized
+                    echo json_encode(["error" => "Credenziali non valide."]);
                 }
             } else {
-                http_response_code(405); // Method Not Allowed
-                echo json_encode(["error" => "Metodo non supportato."]);
+                http_response_code(400); // Bad Request
+                echo json_encode(["error" => "Dati mancanti."]);
             }
-            break;
+        } else {
+            http_response_code(405); // Method Not Allowed
+            echo json_encode(["error" => "Metodo non supportato."]);
+        }
+        break;
 
     case '/activities':
         if ($requestMethod === 'GET') {
@@ -159,6 +159,22 @@ switch ($requestUri) {
             $activity = new Activity($pdo);
             $activity->delete($activityId);
             echo json_encode(["message" => "Attività eliminata con successo!"]);
+        } else {
+            echo json_encode(["error" => "Metodo non supportato."]);
+        }
+        break;
+
+    case preg_match('/^\/activities\/user\/(\d+)$/', $requestUri, $matches) ? $matches[0] : false:
+        $userId = $matches[1]; // Cattura l'ID dell'utente
+        if ($requestMethod === 'GET') {
+            $activity = new Activity($pdo);
+            $activities = $activity->getActivitiesByUserId($userId);
+
+            if (empty($activities)) {
+                echo json_encode(["error" => "Nessuna attività trovata per l'ID utente: $userId."]);
+            } else {
+                echo json_encode($activities);
+            }
         } else {
             echo json_encode(["error" => "Metodo non supportato."]);
         }
