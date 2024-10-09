@@ -26,7 +26,7 @@ function Activities() {
 
   return (
     <>
-      <small className="ms_bg-w">{error ? error : "Connessione stabilita correttamente"}</small>
+      <small className="ms_bg-w"><i>{error ? error : "Connessione stabilita correttamente"}</i></small>
       <h3>ATTIVITA' IN EVIDENZA</h3>
       <p>Lista di Attività che provengono dalla Chiamata API</p>
       {activities.length > 0 ? (

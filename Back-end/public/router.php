@@ -37,19 +37,34 @@ switch ($requestUri) {
         if ($requestMethod === 'POST') {
             // Registrazione dell'utente
             $user = new User($pdo);
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
 
-            if ($user->register($username, $email, $password)) {
-                echo json_encode(["message" => "Utente registrato con successo!"]);
+            // Leggi il corpo della richiesta e decodifica i dati JSON
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            // Assicurati che i dati siano stati decodificati correttamente
+            if (isset($data['username'], $data['email'], $data['password'])) {
+                $username = $data['username'];
+                $email = $data['email'];
+                $password = $data['password'];
+
+                // Registrazione dell'utente
+                if ($user->register($username, $email, $password)) {
+                    echo json_encode(["message" => "Utente registrato con successo!"]);
+                } else {
+                    echo json_encode(["error" => "Registrazione fallita."]);
+                }
             } else {
-                echo json_encode(["error" => "Registrazione fallita."]);
+                // Se le chiavi non sono state trovate, restituisci un errore
+                http_response_code(400); // Bad Request
+                echo json_encode(["error" => "Dati mancanti."]);
             }
         } else {
+            // Gestisci metodi non supportati
+            http_response_code(405); // Method Not Allowed
             echo json_encode(["error" => "Metodo non supportato."]);
         }
         break;
+
 
         // Rotte per Utente specifico
     case (preg_match('/^\/users\/(\d+)$/', $requestUri, $matches) ? true : false):
@@ -58,7 +73,7 @@ switch ($requestUri) {
             $user = new User($pdo);
             $userData = $user->getUserById($userId);
             if ($userData) {
-                echo json_encode($userData); 
+                echo json_encode($userData);
             } else {
                 echo json_encode(["error" => "Utente non trovato."]);
             }

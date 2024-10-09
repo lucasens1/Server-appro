@@ -3,6 +3,7 @@ import MyHeader from './components/common/Header.jsx';
 import Activities from './components/Activities.jsx';
 import "./assets/styles/App.css";
 
+
 function App() {
   return (
     <>

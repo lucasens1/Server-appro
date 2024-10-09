@@ -23,3 +23,50 @@ export const fetchData = async (stringaDaFineAPI, method = "GET", body = null) =
         throw error;
     }
 }
+
+export const registerUser = async (stringaDaFineAPI, method = "POST", body) => {
+    try {
+        const options = {
+            method,
+            headers : {
+                'Content-type' : 'application/json'
+            },
+            ...(body && {body: JSON.stringify(body)})
+        }
+        
+        const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`, options);
+
+        if(!response.ok){
+            throw new Error('Registrazione fallita!');
+        }
+        const data = await response.json(); // Restituisci i dati della risposta
+        console.log('Registrazione effettuata con successo', data);
+        return data; // Restituisci i dati
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const loginUser = async (stringaDaFineAPI, method = 'POST', body) => {
+    try{
+        const options = {
+            method,
+            headers : {
+                'Content-type' : 'application-json'
+            },
+            // Spread del body e diventa JSON, che poi viene decodificato nel Back
+            ...(body && {body: JSON.stringify(body)})
+        }
+        const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`, options);
+
+        if(!response.ok){
+            console.log('Login fallito');
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
