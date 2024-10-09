@@ -82,20 +82,36 @@ switch ($requestUri) {
         }
         break;
 
-    case '/login':
-        if ($requestMethod === 'POST') {
-            $user = new User($pdo);
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            if ($user->login($email, $password)) {
-                echo json_encode(["message" => "Login effettuato con successo!"]);
+        case '/login':
+            if ($requestMethod === 'POST') {
+                $user = new User($pdo);
+        
+                // Leggi il corpo della richiesta e decodifica i dati JSON
+                $data = json_decode(file_get_contents('php://input'), true);
+        
+                // Verifica che email e password siano presenti nei dati
+                if (isset($data['email'], $data['password'])) {
+                    $email = $data['email'];
+                    $password = $data['password'];
+        
+                    // Prova a effettuare il login
+                    if ($user->login($email, $password)) {
+                        // Prendo i dati utente!
+                        $userData = $user->getUserByEmail($email);
+                        echo json_encode(["message" => "Login effettuato con successo!", "user" => $userData]);
+                    } else {
+                        http_response_code(401); // Unauthorized
+                        echo json_encode(["error" => "Credenziali non valide."]);
+                    }
+                } else {
+                    http_response_code(400); // Bad Request
+                    echo json_encode(["error" => "Dati mancanti."]);
+                }
             } else {
-                echo json_encode(["error" => "Credenziali non valide."]);
+                http_response_code(405); // Method Not Allowed
+                echo json_encode(["error" => "Metodo non supportato."]);
             }
-        } else {
-            echo json_encode(["error" => "Metodo non supportato."]);
-        }
-        break;
+            break;
 
     case '/activities':
         if ($requestMethod === 'GET') {

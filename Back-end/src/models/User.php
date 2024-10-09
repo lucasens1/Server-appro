@@ -52,6 +52,19 @@ class User{
 
         return $user;
     }
+    
+    public function getUserByEmail($email) {
+        // Prepara la query SQL per cercare l'utente per email
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Recupera i dati dell'utente
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Restituisci i dati dell'utente o null se non trovato
+        return $user ? $user : null;
+    }
 }
 
 ?>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import MyHeader from "../components/common/Header";
 import { registerUser } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 function MyRegisterPage() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username : '',
         email: '',
@@ -23,6 +25,8 @@ function MyRegisterPage() {
             console.log(formData)
             const response = await registerUser('/users', 'POST', formData);
             console.log(response);
+
+            navigate('/login')
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +39,7 @@ function MyRegisterPage() {
         <section>
           <MyHeader />
         </section>
-        <section className="p-2 fc-w callout">
+        <section className="p-2 fc-w callout d-flex">
           <form
             action=""
             className="p-2 callout col-6 d-flex flex-col align-center"
@@ -52,6 +56,10 @@ function MyRegisterPage() {
 
             <button type="submit" className="mg-1 MyRegBtn">Registrati!</button>
           </form>
+          <div className="col-6 callout text-center p-2">
+            <h3>Registrati!</h3>
+            <small>Entra e registra la tua attività!</small>
+          </div>
         </section>
       </div>
     </>

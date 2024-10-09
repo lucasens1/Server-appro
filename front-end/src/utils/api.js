@@ -53,7 +53,7 @@ export const loginUser = async (stringaDaFineAPI, method = 'POST', body) => {
         const options = {
             method,
             headers : {
-                'Content-type' : 'application-json'
+                'Content-type' : 'application/json'
             },
             // Spread del body e diventa JSON, che poi viene decodificato nel Back
             ...(body && {body: JSON.stringify(body)})
@@ -61,7 +61,9 @@ export const loginUser = async (stringaDaFineAPI, method = 'POST', body) => {
         const response = await fetch(`${API_BASE_URL}${stringaDaFineAPI}`, options);
 
         if(!response.ok){
-            console.log('Login fallito');
+            const errorData = await response.json();
+            console.log('Login fallito:', errorData);
+            throw new Error(errorData.error || 'Login fallito');
         }
         const data = await response.json();
         console.log(data);

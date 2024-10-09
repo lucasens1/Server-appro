@@ -4,7 +4,7 @@ function MyHeader() {
     <>
       <header className="p-2 d-flex justify-space-between align-center ms_header">
         <div className="d-flex gap-1 align-center">
-          <h2>ACTIVIX</h2>
+          <Link to="/"><h2>ACTIVIX</h2></Link>
           <p>
             <strong>Benvenuto nel Gestionale delle Attività</strong>
           </p>
